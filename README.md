@@ -1,4 +1,4 @@
-# Pokedex Rewards
+# ShifuDex
 
 O comando `/poke` abre um menu com a porcentagem da Pokédex do jogador e libera
 recompensas a cada faixa completada. A última, em 100%, entrega um Pokémon com
@@ -9,20 +9,20 @@ skin exclusiva.
 
 ## Instalação
 
-Joga `pokedex-rewards-1.0.0.jar` na pasta `mods/`, junto com o Cobblemon 1.8.x e
+Baixa o jar em [Releases](../../releases) e joga na pasta `mods/`, junto com o Cobblemon 1.8.x e
 o Fabric API. O fabric-language-kotlin já vem embutido no Cobblemon.
 
-Sobe o servidor uma vez — ele cria `config/pokedexrewards.json`.
+Sobe o servidor uma vez e ele cria `config/pokedexrewards.json`.
 
 ## Comandos
 
 | Comando | Permissão |
 | --- | --- |
-| `/poke` — abre o menu | todos |
-| `/poke missoes` — missões diárias, semanais e mensais | todos |
-| `/poke diario` — diário de capturas | todos |
-| `/poke reload` — recarrega a config | op nível 2 |
-| `/poke reset <jogador>` — apaga os resgates dele | op nível 2 |
+| `/poke`: abre o menu | todos |
+| `/poke missoes`: missões diárias, semanais e mensais | todos |
+| `/poke diario`: diário de capturas | todos |
+| `/poke reload`: recarrega a config | op nível 2 |
+| `/poke reset <jogador>`: apaga os resgates dele | op nível 2 |
 
 `/pokerewards` e `/pokedexrewards` abrem o mesmo menu.
 
@@ -54,7 +54,7 @@ Cada nível de recompensa:
 - Cores com `&`, ou `&#FF00AA` pra hex
 - `metric`: `CAUGHT` (só capturados) ou `SEEN` (vistos também)
 
-### ⚠️ Ajustar o comando de dinheiro
+### Atenção: ajuste o comando de dinheiro
 
 As pokemoedas vêm como `eco give %player% 15000`, que é só um exemplo. Troque
 pelo comando da economia do servidor, senão o jogador não recebe nada.
@@ -62,7 +62,7 @@ pelo comando da economia do servidor, senão o jogador não recebe nada.
 ## A recompensa dos 100%
 
 Hoje entrega um **Mewtwo shiny nível 100**, só de exemplo pra mostrar o formato.
-A ideia é virar uma skin exclusiva depois — quando tiver, é só trocar o
+A ideia é virar uma skin exclusiva depois. Quando tiver, é só trocar o
 `commands` desse nível na config.
 
 ## Missões diárias, semanais e mensais
@@ -103,7 +103,7 @@ Abre com `/poke missoes` ou pelo botão no menu principal. O reset usa o fuso de
 
 ## Voz da Pokédex
 
-Ao selecionar um Pokémon na Pokédex do Cobblemon, uma voz narra a entrada —
+Ao selecionar um Pokémon na Pokédex do Cobblemon, uma voz narra a entrada, com
 nome, tipagem e a descrição da própria Pokédex:
 
 > *"Venusaur. Pokémon do tipo Planta e Venenoso. Há uma grande flor nas costas
@@ -111,14 +111,14 @@ nome, tipagem e a descrição da própria Pokédex:
 > nutrição e luz solar..."*
 
 São 1025 locuções, uma por espécie, embutidas no jar. Tudo sai dos dados do
-próprio Cobblemon — inclusive os tipos e as descrições em português — então o
+próprio Cobblemon (inclusive os tipos e as descrições em português), então o
 áudio bate exatamente com o texto na tela. Os 526 Pokémon de tipo duplo falam
 as duas tipagens.
 
-### ⚠️ Esta é a única parte que exige mod no cliente
+### Atenção: esta é a única parte que exige mod no cliente
 
 O resto do mod é 100% servidor. A voz não dá: o clique na tela da Pokédex
-**não gera pacote para o servidor** — a tela é do cliente e lê dados já
+**não gera pacote para o servidor**: a tela é do cliente e lê dados já
 sincronizados. Dos pacotes serverbound de Pokédex do Cobblemon só existem
 `StartScanningPacket` e `FinishScanningPacket`.
 
@@ -126,14 +126,14 @@ Então a voz usa um mixin em `PokedexGUI.setSelectedEntry`, que roda no cliente.
 Na prática:
 
 - quem **instalar o jar** ouve a voz e usa tudo o mais normalmente
-- quem **não instalar** continua com missões, resgates e diário funcionando —
+- quem **não instalar** continua com missões, resgates e diário funcionando,
   só não ouve a voz
 
 O mixin é declarado como `environment: client`, então o servidor nem carrega.
 
 ### Config da voz
 
-Fica separada, em `config/pokedexrewards-voz.json`, na máquina do jogador — é
+Fica separada, em `config/pokedexrewards-voz.json`, na máquina do jogador. É
 ele quem decide se quer ouvir:
 
 ```json
@@ -150,7 +150,7 @@ ele quem decide se quer ouvir:
 
 ### Sobre a voz usada
 
-É a voz `Microsoft Maria` (pt-BR), a versão moderna do Windows — acessada via
+É a voz `Microsoft Maria` (pt-BR), a versão moderna do Windows, acessada via
 WinRT, não pelo SAPI antigo, que só expõe as vozes robóticas "Desktop". Gerada
 uma vez e embutida como OGG. Não é clone de nenhum dublador.
 
@@ -160,7 +160,7 @@ Para trocar de voz depois (o Windows também tem `Microsoft Daniel`, masculina),
 ### Por que não diz "o Pokémon Rato"
 
 A categoria ("Mouse Pokémon") existe na PokéAPI em 11 idiomas, mas **não em
-português** — e em espanhol são palavras inventadas (`Ratón`, `Acuartija`,
+português**, e em espanhol são palavras inventadas (`Ratón`, `Acuartija`,
 `Abazón`), não tradução literal. Traduzir as 643 categorias seria inventar
 termos, com erro garantido em parte deles.
 
@@ -177,7 +177,7 @@ Abre de dois jeitos:
 - **Shift + clique direito segurando qualquer Pokédex** do Cobblemon
 - `/poke diario`, ou o botão no menu principal
 
-O diário mostra bioma, dimensão, data/hora e — em rede — em qual servidor foi.
+O diário mostra bioma, dimensão, data/hora e, em rede, em qual servidor foi.
 Ordenado da captura mais recente para a mais antiga, paginado.
 
 > Isso **não** altera a tela da Pokédex do Cobblemon. Aquela tela é do cliente;
@@ -201,7 +201,7 @@ Arquivo local **não serve** em rede: cada mundo tem o seu, então o jogador
 resgata o mesmo prêmio em cada servidor. Duas coisas precisam estar
 compartilhadas:
 
-**1. A Pokédex** — é config do Cobblemon, não deste mod. Em
+**1. A Pokédex**: é config do Cobblemon, não deste mod. Em
 `config/cobblemon/main.json`, em todos os servidores:
 
 ```json
@@ -210,7 +210,7 @@ compartilhadas:
 "mongoDBDatabaseName": "cobblemon"
 ```
 
-**2. Os resgates** — com o `storage.mode` em `AUTO`, eles seguem o Cobblemon
+**2. Os resgates**: com o `storage.mode` em `AUTO`, eles seguem o Cobblemon
 sozinhos e vão pro mesmo banco. Não precisa configurar nada a mais.
 
 Se quiser um banco separado só pros resgates, preencha
@@ -221,9 +221,9 @@ então dois servidores tentando ao mesmo tempo resultam em um só ganhando. Os
 comandos da recompensa só rodam depois que o resgate está gravado.
 
 Se o Mongo for pedido e não conectar, os resgates ficam **bloqueados** em vez
-de cair pro arquivo local — cair de volta traria o bug de volta em silêncio. O
+de cair pro arquivo local, porque cair de volta traria o bug de volta em silêncio. O
 menu continua abrindo e o erro aparece no log.
 
 ## Compilar
 
-Precisa de JDK 21. `gradlew.bat build` — o jar sai em `build/libs/`.
+Precisa de JDK 21. `gradlew.bat build` e o jar sai em `build/libs/`.

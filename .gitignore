@@ -10,3 +10,4 @@ run/
 # o / no inicio evita pegar o gradle/wrapper/gradle-wrapper.jar
 /pokedex-rewards-*.jar
 /pokedex-rewards-*.zip
+/shifudex-*.jar

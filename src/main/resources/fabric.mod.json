@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "pokedexrewards",
   "version": "${version}",
-  "name": "Pokedex Rewards",
+  "name": "ShifuDex",
   "description": "Da um motivo pra Pokedex existir: /poke abre um menu com a sua porcentagem e libera recompensas a cada faixa completada, terminando numa skin exclusiva nos 100%.",
   "authors": [
     "bigao"
